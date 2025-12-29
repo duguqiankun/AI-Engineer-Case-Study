@@ -5,6 +5,7 @@ from src.analyzer import BMWAnalyzer
 from src.visualizer import BMWVisualizer
 from src.llm_client import LLMClient
 from src.report_generator import ReportGenerator
+from src.evaluator import ReportEvaluator
 
 def main():
     print("Starting BMW Sales Report Generation Workflow...")
@@ -56,6 +57,11 @@ def main():
     print("="*50)
     print(f"SUCCESS! Interactive Report generated at: {report_path}")
     print("="*50)
+
+    # 6. Evaluate Report
+    print("Evaluating report quality...")
+    evaluator = ReportEvaluator(report_path)
+    evaluator.print_report()
 
 if __name__ == "__main__":
     main()

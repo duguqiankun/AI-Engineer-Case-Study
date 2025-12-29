@@ -9,9 +9,10 @@ This project automates the analysis of BMW sales data, generating key insights a
 ├── src/
 │   ├── data_loader.py      # Handles data ingestion and validation
 │   ├── analyzer.py         # Performs statistical analysis
-│   ├── visualizer.py       # Generates plots using matplotlib/seaborn
+│   ├── visualizer.py       # Generates interactive plots using Plotly
 │   ├── llm_client.py       # Interfaces with Google Gemini API
-│   └── report_generator.py # Assembles final Markdown report
+│   ├── report_generator.py # Assembles final HTML report
+│   └── evaluator.py        # Validates report quality (Bonus)
 ├── output/                 # Generated artifacts (images, report)
 ├── data/                   # Input data
 ├── main.py                 # Entry point
@@ -64,11 +65,12 @@ python main.py
 ```
 
 The script will:
-1.  Load the sales data from `data/BMW sales data (2020-2024).xlsx`.
-2.  Compute trends (including Fuel/Transmission), top performers, and correlations.
-3.  Generate interactive Plotly charts.
-4.  Send summary statistics to the LLM to generate a narrative.
-5.  Save the final report to `output/Interactive_Report.html`.
+1.  **Load Data**: Reads sales data from `data/BMW sales data (2020-2024).xlsx`.
+2.  **Analyze**: Computes trends, aggregations, and correlations.
+3.  **Visualize**: Generates interactive charts (Heatmaps, Trends, Distributions).
+4.  **Narrate**: Sends summary statistics to the LLM to generate a data-driven report.
+5.  **Compile**: Assembles the final `output/Interactive_Report.html`.
+6.  **Evaluate**: Automatically scores the generated report for quality and completeness.
 
 ## Deliverables
 -   **Codebase**: Modular Python scripts.

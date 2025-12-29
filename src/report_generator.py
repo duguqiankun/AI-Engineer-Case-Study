@@ -80,7 +80,7 @@ class ReportGenerator:
             'Regional': ['regional_sales', 'top_models'],
             'Mobility': ['fuel_trend', 'transmission'],
             'Fuel': ['fuel_trend', 'transmission'], # Fallback
-            'Drivers': ['price_segments', 'color_sales', 'price_vs_sales']
+            'Drivers': ['price_segments', 'color_sales', 'correlation_heatmap']
         }
         
         # We iterate through the HTML to find headers, and if they match a keyword, we prepare the injection
@@ -152,6 +152,7 @@ class ReportGenerator:
             </style>
         </head>
         <body>
+            <h1>BMW Sales Performance Analysis: Executive Report</h1>
             {narrative_html}
         </body>
         </html>

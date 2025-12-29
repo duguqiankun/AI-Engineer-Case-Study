@@ -44,6 +44,15 @@ class BMWAnalyzer:
     def get_color_sales(self):
         """Aggregates sales by Color."""
         return self.df.groupby('Color')['Sales_Volume'].sum().sort_values(ascending=False)
+
+    def get_fuel_by_price_segment(self):
+        """Aggregates sales by Price Segment and Fuel Type."""
+        bins = [0, 40000, 70000, 100000, float('inf')]
+        labels = ['Budget (<40k)', 'Mid-Range (40k-70k)', 'Premium (70k-100k)', 'Luxury (>100k)']
+        
+        df_copy = self.df.copy()
+        df_copy['Price_Segment'] = pd.cut(df_copy['Price_USD'], bins=bins, labels=labels)
+        return df_copy.groupby(['Price_Segment', 'Fuel_Type'])['Sales_Volume'].sum().unstack().fillna(0)
     
     def get_summary_stats(self):
         """Returns a dictionary of summary statistics for the LLM prompt."""
@@ -55,6 +64,7 @@ class BMWAnalyzer:
         correlations = self.get_correlations()
         price_segments = self.get_price_segments()
         color_sales = self.get_color_sales()
+        fuel_by_segment = self.get_fuel_by_price_segment()
         
         return {
             "total_sales": int(self.df['Sales_Volume'].sum()),
@@ -66,5 +76,6 @@ class BMWAnalyzer:
             "transmission_split": transmission.to_dict(),
             "price_segments": price_segments.to_dict(),
             "color_sales": color_sales.head(5).to_dict(),
-            "correlations": correlations.drop('Sales_Volume').to_dict() # Exclude self-correlation
+            "correlations": correlations.drop('Sales_Volume').to_dict(), # Exclude self-correlation
+            "fuel_by_segment": fuel_by_segment.to_dict()
         }

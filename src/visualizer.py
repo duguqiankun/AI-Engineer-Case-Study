@@ -38,13 +38,22 @@ class BMWVisualizer:
         fig.update_layout(xaxis_title='Sales Volume', yaxis_title='Model', yaxis={'categoryorder':'total ascending'})
         return self.get_plotly_html(fig)
     
-    def plot_price_vs_sales(self):
-        # Sampling for performance if data is huge, but 16k rows is fine for plotly
-        fig = px.scatter(self.df, x='Price_USD', y='Sales_Volume', 
-                         color='Fuel_Type',
-                         title='Price vs Sales Volume Correlation',
-                         opacity=0.6)
-        fig.update_layout(xaxis_title='Price (USD)', yaxis_title='Sales Volume')
+    def plot_correlation_heatmap(self):
+        """Generates a correlation heatmap for numerical variables."""
+        numeric_cols = ['Engine_Size_L', 'Mileage_KM', 'Price_USD', 'Sales_Volume']
+        # Filter for existing columns
+        cols_to_use = [col for col in numeric_cols if col in self.df.columns]
+        
+        if len(cols_to_use) < 2:
+            return "<div>Not enough numerical data for correlation analysis.</div>"
+
+        corr_matrix = self.df[cols_to_use].corr()
+        
+        fig = px.imshow(corr_matrix, 
+                        text_auto=True,
+                        aspect="auto",
+                        color_continuous_scale='RdBu_r',
+                        title='Correlation Heatmap: Key Drivers')
         return self.get_plotly_html(fig)
 
     def plot_fuel_trend(self):
@@ -88,7 +97,7 @@ class BMWVisualizer:
         plots['yearly_trend'] = self.plot_yearly_trend()
         plots['regional_sales'] = self.plot_regional_sales()
         plots['top_models'] = self.plot_top_models()
-        plots['price_vs_sales'] = self.plot_price_vs_sales()
+        plots['correlation_heatmap'] = self.plot_correlation_heatmap()
         plots['fuel_trend'] = self.plot_fuel_trend()
         plots['transmission'] = self.plot_transmission()
         plots['price_segments'] = self.plot_price_segments()

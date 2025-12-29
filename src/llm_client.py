@@ -39,6 +39,7 @@ class LLMClient:
         - **Price Segments (Volume by Range)**: {stats['price_segments']}
         - **Color Preferences**: {stats['color_sales']}
         - **Correlations**: {stats['correlations']}
+        - **Fuel Preference by Price Segment**: {stats['fuel_by_segment']}
 
         ### Requirements:
         1. **Executive Summary**: Brief overview of the key findings.
@@ -50,7 +51,11 @@ class LLMClient:
             -   Analyze **Aesthetic Preferences**: Which colors are most popular?
             -   Mention the statistical correlations as supporting evidence.
         6. **Strategic Recommendations**: Provide actionable business advice based on the data.
-        7. **Additional Insight**: Add one creative insight or prediction about the future of mobility.
+        7. **Additional Insight**: Provide one specific, data-driven insight that is not covered in the sections above. Look for deeper patterns in the provided data (e.g., specific model performance in certain regions vs others, or fuel type preference changes in specific price segments).
 
-        Format the output in clear Markdown with headers. Do not include any code blocks or raw JSON. Focus on business value.
+        ### Formatting Guidelines:
+        -   **Do NOT include a document title** (e.g., "BMW Sales Report"). Start directly with the Executive Summary.
+        -   Use **Markdown level 2 headers (##)** for the main sections listed above.
+        -   Do not include any code blocks or raw JSON.
+        -   Focus on business value and actionable insights.
         """
