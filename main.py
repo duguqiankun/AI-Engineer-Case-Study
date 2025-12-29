@@ -31,8 +31,9 @@ def main():
     # 3. Generate Visualizations
     print("Generating visualizations...")
     visualizer = BMWVisualizer(df)
-    plot_paths = visualizer.generate_all_plots()
-    print(f"Plots saved to {visualizer.output_dir}")
+    # This now returns a dictionary of HTML strings
+    plot_htmls = visualizer.generate_all_plots()
+    print("Interactive plots generated.")
 
     # 4. Generate AI Narrative
     print("Generating AI narrative...")
@@ -48,12 +49,12 @@ def main():
         narrative = f"## AI Generation Failed\n\nError: {e}"
 
     # 5. Compile Report
-    print("Compiling final report...")
+    print("Compiling final interactive report...")
     generator = ReportGenerator()
-    report_path = generator.generate_report(narrative, plot_paths)
+    report_path = generator.generate_interactive_report(narrative, plot_htmls)
     
     print("="*50)
-    print(f"SUCCESS! Report generated at: {report_path}")
+    print(f"SUCCESS! Interactive Report generated at: {report_path}")
     print("="*50)
 
 if __name__ == "__main__":

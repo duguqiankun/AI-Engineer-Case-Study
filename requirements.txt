@@ -5,3 +5,5 @@ seaborn
 google-generativeai
 python-dotenv
 tabulate
+plotly
+markdown

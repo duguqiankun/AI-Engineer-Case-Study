@@ -19,20 +19,36 @@ This project automates the analysis of BMW sales data, generating key insights a
 └── .env                    # API Keys configuration
 ```
 
+## Prerequisites
+
+-   Python 3.8 or higher
+-   A Google Gemini API Key
+
 ## Setup & Installation
 
 1.  **Clone the repository**:
     ```bash
-    git clone <repo-url>
-    cd <repo-name>
+    git clone https://github.com/duguqiankun/AI-Engineer-Case-Study.git
+    cd AI-Engineer-Case-Study
     ```
 
-2.  **Install dependencies**:
+2.  **Create and activate a virtual environment** (recommended):
+    ```bash
+    # Windows
+    python -m venv venv
+    venv\Scripts\activate
+
+    # macOS/Linux
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+
+3.  **Install dependencies**:
     ```bash
     pip install -r requirements.txt
     ```
 
-3.  **Configure API Key**:
+4.  **Configure API Key**:
     -   Copy `.env.example` to `.env`:
         ```bash
         cp .env.example .env
@@ -48,13 +64,13 @@ python main.py
 ```
 
 The script will:
-1.  Load the sales data.
-2.  Compute trends, top performers, and correlations.
-3.  Generate charts in `output/images/`.
+1.  Load the sales data from `data/BMW sales data (2020-2024).xlsx`.
+2.  Compute trends (including Fuel/Transmission), top performers, and correlations.
+3.  Generate interactive Plotly charts.
 4.  Send summary statistics to the LLM to generate a narrative.
-5.  Save the final report to `output/Report.md`.
+5.  Save the final report to `output/Interactive_Report.html`.
 
 ## Deliverables
 -   **Codebase**: Modular Python scripts.
--   **Generated Report**: `output/Report.md` (check this file after running).
+-   **Generated Report**: `output/Interactive_Report.html` (open in browser).
 -   **Executive Summary**: `Executive_Summary.md` (describing the solution design).
